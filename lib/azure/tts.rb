@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 require "azure/tts/version"
-
 require "faraday"
 require "faraday_middleware"
-require "ruby_speech"
-
 require "azure/tts/constants"
 require "azure/tts/errors"
 require "azure/tts/api"
