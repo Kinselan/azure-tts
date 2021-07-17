@@ -35,6 +35,7 @@ module Azure
 
     def speak(text:, voice: nil, locale: nil, gender: nil, neural: nil, format: :audio_24khz_160kbitrate_mono_mp3, rate: nil) # rubocop:disable Metrics/ParameterLists
       voice ||= voices.find(locale: locale, gender: gender, neural: neural)
+      puts "rate: #{rate.inspect}"
       Speaker.new(text: text, voice: voice, format: format, rate: rate).speak
     end
 

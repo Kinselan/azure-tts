@@ -7,10 +7,11 @@ module Azure
         @text = text
         @voice = voice
         @format = format
-        @rate = rate || "100%"
+        @rate = rate || "1"
       end
 
       def speak
+        puts "Speaking..."
         response = Azure::TTS.api.tts.post(nil, ssml, headers)
         raise RequestError, response unless response.success?
 
@@ -18,6 +19,7 @@ module Azure
       end
 
       def ssml
+        puts "Generating SSML...."
         ssml = RubySpeech::SSML.draw
         ssml.voice gender: @voice.gender, name: @voice.short_name, language: @voice.locale do
           prosody rate: @rate do
