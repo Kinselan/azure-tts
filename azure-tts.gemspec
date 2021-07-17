@@ -7,12 +7,12 @@ require "azure/tts/version"
 Gem::Specification.new do |spec|
   spec.name          = "azure-tts"
   spec.version       = Azure::TTS::VERSION
-  spec.authors       = ["Cristian Bica"]
-  spec.email         = ["cristian.bica@gmail.com"]
+  spec.authors       = ["Daniel Nalesnik"]
+  spec.email         = ["daniel.nalesnik@gmail.com"]
 
   spec.summary       = "Azure TTS"
   spec.description   = "Text-to-speech gem based using Azure Cognitive Speech Services."
-  spec.homepage      = "https://github.com/cristianbica/azure-tts"
+  spec.homepage      = "https://github.com/kinselan/azure-tts"
   spec.license       = "MIT"
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
@@ -24,9 +24,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "faraday"
   spec.add_dependency "faraday_middleware"
-  spec.add_dependency "ruby_speech"
 
-  spec.add_development_dependency "bundler", "~> 1.17"
+  spec.add_development_dependency "bundler", "~> 2.1.4"
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "minitest-around"
   spec.add_development_dependency "multi_json"
