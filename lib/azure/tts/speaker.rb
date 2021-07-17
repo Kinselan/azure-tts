@@ -22,7 +22,7 @@ module Azure
         puts "Generating SSML....rate: #{@rate.inspect} | @voice.short_name: #{@voice.short_name.inspect}"
         ssml = RubySpeech::SSML.draw
         ssml.voice gender: @voice.gender, name: @voice.short_name, language: @voice.locale do
-          prosody rate: 0.5 do
+          prosody rate: 0.8 do
             @text || "你好，你长得怎么样"
           end
         end
