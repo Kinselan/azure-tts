@@ -23,6 +23,11 @@ module Azure
         voices = voices.sort_by { |voice| voice.neural? ? 0 : 1 } if neural
         voices.first
       end
+
+      def find_by_shortname(short_name)
+        voices = all
+        voices.detect { |voice| voice.short_name == short_name }
+      end
     end
 
     class Voice
