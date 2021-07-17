@@ -29,6 +29,9 @@ module Azure
       attr_reader :name, :short_name, :gender, :locale
 
       def initialize(data)
+        puts "*" * 100
+        puts "data: #{data.inspect}"
+        puts "*" * 100
         @name = data["Name"]
         @short_name = data["ShortName"]
         @gender = data["Gender"].downcase.to_sym
