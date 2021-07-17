@@ -31,7 +31,7 @@ module Azure
       def headers
         {
           "Content-Type" => "application/ssml+xml",
-          "X-Microsoft-OutputFormat" => Azure::TTS::AUDIO_FORMATS[@format],
+          "X-Microsoft-OutputFormat" => "audio-24khz-160kbitrate-mono-mp3",
           "User-Agent" => "Azure::TTS"
         }
       end
