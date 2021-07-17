@@ -3,15 +3,13 @@
 module Azure
   module TTS
     class Speaker
-      def initialize(text:, voice:, format:, rate:)
+      def initialize(text:, voice_short_name:, rate:)
         @text = text
-        @voice = voice
-        @format = format
-        @rate = rate || "1"
+        @voice_short_name = voice_short_name
+        @rate = rate
       end
 
       def speak
-        puts "Speaking..."
         response = Azure::TTS.api.tts.post(nil, ssml, headers)
         raise RequestError, response unless response.success?
 
@@ -21,7 +19,7 @@ module Azure
       def ssml
         <<~HEREDOC
           <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-            <voice name="zh-CN-XiaoxiaoNeural">
+            <voice name=#{@voice_short_name}>
               <prosody rate="#{@rate}" pitch="0%">
                 #{@text}
               </prosody>
