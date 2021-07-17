@@ -33,9 +33,9 @@ module Azure
       @voices ||= Voices.new
     end
 
-    def speak(text:, voice: nil, locale: nil, gender: nil, neural: nil, format: :audio_24khz_160kbitrate_mono_mp3) # rubocop:disable Metrics/ParameterLists
+    def speak(text:, voice: nil, locale: nil, gender: nil, neural: nil, format: :audio_24khz_160kbitrate_mono_mp3, rate: nil) # rubocop:disable Metrics/ParameterLists
       voice ||= voices.find(locale: locale, gender: gender, neural: neural)
-      Speaker.new(text: text, voice: voice, format: format).speak
+      Speaker.new(text: text, voice: voice, format: format, rate: rate).speak
     end
 
     def token

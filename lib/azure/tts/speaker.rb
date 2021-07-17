@@ -3,10 +3,11 @@
 module Azure
   module TTS
     class Speaker
-      def initialize(text:, voice:, format:)
+      def initialize(text:, voice:, format:, rate:)
         @text = text
         @voice = voice
         @format = format
+        @rate = rate || "100%"
       end
 
       def speak
@@ -18,7 +19,14 @@ module Azure
 
       def ssml
         ssml = RubySpeech::SSML.draw
-        ssml.voice gender: @voice.gender, name: @voice.short_name, language: @voice.locale, content: @text
+        ssml.voice gender: @voice.gender, name: @voice.short_name, language: @voice.locale do
+          prosody rate: @rate do
+            @text
+          end
+        end
+        puts "*" * 100
+        puts "ssml.to_s: #{ssml.to_s.inspect}"
+        puts "*" * 100
         ssml.to_s
       end
 
@@ -32,3 +40,13 @@ module Azure
     end
   end
 end
+
+# speak = RubySpeech::SSML.draw do
+#   voice gender: :male, name: 'fred' do
+#     prosody rate: '50%' do
+#       "my slow word"
+#     end
+#   end
+# end
+
+# speak.to_s
