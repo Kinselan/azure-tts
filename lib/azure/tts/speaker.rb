@@ -30,17 +30,15 @@ module Azure
         # puts "ssml.to_s: #{ssml.to_s.inspect}"
         # puts "*" * 100
 
-        ssml = <<~HEREDOC
+        <<~HEREDOC
           <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
             <voice name="zh-CN-XiaoxiaoNeural">
-              <prosody rate="-20%" pitch="0%">
-                我叫丹尼尔。我是美国人。
+              <prosody rate="#{@rate}" pitch="0%">
+                #{@text}
               </prosody>
             </voice>
           </speak>
         HEREDOC
-        # ssml = '<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US"><voice name="zh-CN-XiaoxiaoNeural"><prosody rate="-20%" pitch="0%">你好你长得怎吗样</prosody></voice></speak>'
-        ssml.to_s
       end
 
       def headers
