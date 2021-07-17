@@ -19,10 +19,10 @@ module Azure
       end
 
       def ssml
-        puts "Generating SSML...."
+        puts "Generating SSML....rate: #{@rate.inspect} | @voice.short_name: #{@voice.short_name.inspect}"
         ssml = RubySpeech::SSML.draw
         ssml.voice gender: @voice.gender, name: @voice.short_name, language: @voice.locale do
-          prosody rate: @rate do
+          prosody rate: @rate.to_f do
             @text
           end
         end
