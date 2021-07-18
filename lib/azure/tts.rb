@@ -30,8 +30,8 @@ module Azure
       @voices ||= Voices.new
     end
 
-    def speak(text:, voice_short_name:, rate:)
-      Speaker.new(text: text, voice_short_name: voice_short_name, rate: rate).speak
+    def speak(text:, azure_tts_pinyin:, voice_short_name:, rate:)
+      Speaker.new(text: text, azure_tts_pinyin: azure_tts_pinyin, voice_short_name: voice_short_name, rate: rate).speak
     end
 
     def token
