@@ -31,25 +31,17 @@ module Azure
       end
 
       def ssml_word
-        # <<~HEREDOC
-        #   <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-        #     <voice name="#{@voice_short_name}">
-        #       <prosody rate="#{@rate}" pitch="0%">
-        #         <phoneme alphabet="sapi" ph="#{@azure_tts_pinyin}">#{@text}</phoneme>               
-        #       </prosody>
-        #     </voice>
-        #   </speak>
-        # HEREDOC
-
-        <<~HEREDOC
+        ssml = <<~HEREDOC
           <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-            <voice name="zh-CN-XiaoxiaoNeural">
-              <prosody rate="0%" pitch="0%">
-                <phoneme alphabet="sapi" ph="hang 2">行</phoneme>
+            <voice name="#{@voice_short_name}">
+              <prosody rate="#{@rate}" pitch="0%">
+                <phoneme alphabet="sapi" ph="#{@azure_tts_pinyin}">#{@text}</phoneme>
               </prosody>
             </voice>
           </speak>
         HEREDOC
+        puts ssml
+        ssml
       end
 
 
