@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "cgi"
+
 module Azure
   module TTS
     class Speaker
@@ -22,9 +24,9 @@ module Azure
       def ssml
         <<~HEREDOC
           <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-            <voice name="#{@voice_short_name}">
-              <prosody rate="#{@rate}" pitch="0%">
-                #{@text}
+            <voice name="#{escape(@voice_short_name)}">
+              <prosody rate="#{escape(@rate)}" pitch="0%">
+                #{escape(@text)}
               </prosody>
             </voice>
           </speak>
@@ -35,9 +37,9 @@ module Azure
         if @include_phoneme
           <<~HEREDOC
             <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-              <voice name="#{@voice_short_name}">
-                <prosody rate="#{@rate}" pitch="0%">
-                  <phoneme alphabet="sapi" ph="#{@azure_tts_pinyin}">#{@text}</phoneme>
+              <voice name="#{escape(@voice_short_name)}">
+                <prosody rate="#{escape(@rate)}" pitch="0%">
+                  <phoneme alphabet="sapi" ph="#{escape(@azure_tts_pinyin)}">#{escape(@text)}</phoneme>
                 </prosody>
               </voice>
             </speak>
@@ -45,9 +47,9 @@ module Azure
         else
           <<~HEREDOC
             <speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-              <voice name="#{@voice_short_name}">
-                <prosody rate="#{@rate}" pitch="0%">
-                  #{@text}
+              <voice name="#{escape(@voice_short_name)}">
+                <prosody rate="#{escape(@rate)}" pitch="0%">
+                  #{escape(@text)}
                 </prosody>
               </voice>
             </speak>
@@ -55,14 +57,13 @@ module Azure
         end
       end
 
-
-
-
-
-
-
-
-      
+      # Every value here is interpolated into an XML document, as either a text
+      # node or an attribute value. Without escaping, a caller passing text that
+      # contains "&" or "<" produces malformed SSML and the API rejects the
+      # request. Callers pass raw text and should not pre-escape.
+      def escape(value)
+        CGI.escapeHTML(value.to_s)
+      end
 
       def headers
         {
